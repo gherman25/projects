@@ -1,6 +1,10 @@
-function [sign_error,matched_error,snr] = binaryPAMsim(N,T_p,bit_rate,sigma,supress_plots)    
-    %%generate binary message:
-    x_n = 2*((rand(1,N)>0.5)-0.5);
+function [sign_error,matched_error,snr, output] = binaryPAMsim(N,T_p,bit_rate,sigma,supress_plots, input)    
+    %%generate random binary message: comment out if using argument
+    if input==0
+        x_n = 2*((rand(1,N)>0.5)-0.5);
+    else 
+        x_n = input;
+    end
     
     % Uncomment to plot DT binary message 
     % figure() 
@@ -120,6 +124,8 @@ function [sign_error,matched_error,snr] = binaryPAMsim(N,T_p,bit_rate,sigma,supr
         x_matched(i) = sign(z(tim));
         x_matched_ct(tim) = sign(z(tim));
     end
+
+    output = x_matched;
     
     % Uncomment to plot CT r(t) and x_hat
     % figure()
